@@ -26,7 +26,8 @@ C.
 %build
 %configure
 
-%{__make}
+%{__make} \
+	CFLAGS="%{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
