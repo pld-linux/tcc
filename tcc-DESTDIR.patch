@@ -1,33 +1,47 @@
---- Makefile~	2003-10-05 12:23:48.000000000 +0200
-+++ Makefile	2004-05-19 01:12:53.360696848 +0200
-@@ -127,13 +127,12 @@
+--- tcc-0.9.21/Makefile~	2004-10-25 23:18:50.000000000 +0200
++++ tcc-0.9.21/Makefile	2004-10-27 23:42:07.601628458 +0200
+@@ -138,19 +138,19 @@
  install: tcc_install libinstall
  
- tcc_install: tcc tcc.1 libtcc1.a bcheck.o
--	$(INSTALL) -m755 tcc $(bindir)
--	$(INSTALL) tcc.1 $(mandir)/man1
--	mkdir -p $(libdir)/tcc
--	mkdir -p $(libdir)/tcc/include
--	$(INSTALL) -m644 libtcc1.a bcheck.o $(libdir)/tcc
-+	$(INSTALL) -d $(DESTDIR)$(bindir) $(DESTDIR)$(mandir)/man1 $(DESTDIR)$(libdir)/tcc/include
-+	$(INSTALL) -m755 tcc $(DESTDIR)$(bindir)
-+	$(INSTALL) tcc.1 $(DESTDIR)$(mandir)/man1
-+	$(INSTALL) -m644 libtcc1.a bcheck.o $(DESTDIR)$(libdir)/tcc
+ tcc_install: $(PROGS) tcc.1 libtcc1$(LIBSUF) $(BCHECK_O) tcc-doc.html tcc.1
+-	mkdir -p "$(bindir)"
+-	$(INSTALL) -s -m755 $(PROGS) "$(bindir)"
++	$(INSTALL) -d "$(DESTDIR)$(bindir)"
++	$(INSTALL) -s -m755 $(PROGS) "$(DESTDIR)$(bindir)"
+ ifndef CONFIG_WIN32
+-	mkdir -p "$(mandir)/man1"
+-	$(INSTALL) tcc.1 "$(mandir)/man1"
++	$(INSTALL) -d "$(DESTDIR)$(mandir)/man1"
++	$(INSTALL) tcc.1 "$(DESTDIR)$(mandir)/man1"
+ endif
+-	mkdir -p "$(libdir)/tcc"
+-	mkdir -p "$(libdir)/tcc/include"
+-	$(INSTALL) -m644 libtcc1$(LIBSUF) $(BCHECK_O) "$(libdir)/tcc"
++	$(INSTALL) -d "$(DESTDIR)$(libdir)/tcc"
++	$(INSTALL) -d "$(DESTDIR)$(libdir)/tcc/include"
++	$(INSTALL) -m644 libtcc1$(LIBSUF) $(BCHECK_O) "$(DESTDIR)$(libdir)/tcc"
  	$(INSTALL) -m644 stdarg.h stddef.h stdbool.h float.h varargs.h \
--                   tcclib.h $(libdir)/tcc/include
-+                   tcclib.h $(DESTDIR)$(libdir)/tcc/include
+-                   tcclib.h "$(libdir)/tcc/include"
+-	mkdir -p "$(docdir)"
+-	$(INSTALL) -m644 tcc-doc.html "$(docdir)"
++                   tcclib.h "$(DESTDIR)$(libdir)/tcc/include"
++	#$(INSTALL) -d "$(DESTDIR)$(docdir)"
++	#$(INSTALL) -m644 tcc-doc.html "$(DESTDIR)$(docdir)"
  
  clean:
  	rm -f *~ *.o tcc tcc1 tcct tcc_g tcctest.ref *.bin *.i ex2 \
-@@ -156,8 +156,9 @@
+@@ -167,10 +167,10 @@
  
  # libtcc generation and example
- libinstall: libtcc.a 
--	$(INSTALL) -m644 libtcc.a $(libdir)
--	$(INSTALL) -m644 libtcc.h $(includedir)
-+	$(INSTALL) -d $(DESTDIR)$(libdir) $(DESTDIR)$(includedir)
-+	$(INSTALL) -m644 libtcc.a $(DESTDIR)$(libdir)
-+	$(INSTALL) -m644 libtcc.h $(DESTDIR)$(includedir)
+ libinstall: libtcc$(LIBSUF) 
+-	mkdir -p "$(libdir)"
+-	$(INSTALL) -m644 libtcc$(LIBSUF) "$(libdir)"
+-	mkdir -p "$(includedir)"
+-	$(INSTALL) -m644 libtcc.h "$(includedir)"
++	$(INSTALL) -d "$(DESTDIR)$(libdir)"
++	$(INSTALL) -m644 libtcc$(LIBSUF) "$(DESTDIR)$(libdir)"
++	$(INSTALL) -d "$(DESTDIR)$(includedir)"
++	$(INSTALL) -m644 libtcc.h "$(DESTDIR)$(includedir)"
  
- libtcc.o: tcc.c i386-gen.c bcheck.c Makefile
+ libtcc.o: tcc.c i386-gen.c Makefile
  	$(CC) $(CFLAGS) -DLIBTCC -c -o $@ $<

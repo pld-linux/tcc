@@ -1,13 +1,14 @@
 Summary:	Tiny C Compiler
 Summary(pl):	Ma³y kompilator C
 Name:		tcc
-Version:	0.9.20
-Release:	4
+Version:	0.9.21
+Release:	1
 License:	LGPL
 Group:		Development/Languages
 Source0:	http://fabrice.bellard.free.fr/tcc/%{name}-%{version}.tar.gz
-# Source0-md5:	c883b88e874a9bb9163eb14dc43b178c
+# Source0-md5:	364eb218266e5bd4dc97752e6c111d14
 Patch0:		%{name}-DESTDIR.patch
+Patch1:		%{name}-regparm.patch
 ExclusiveArch:	%{ix86}
 URL:		http://fabrice.bellard.free.fr/tcc/
 Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -22,7 +23,8 @@ C.
 
 %prep
 %setup -q
-%patch0 -p0
+%patch0 -p1
+%patch1 -p1
 
 %build
 %configure
@@ -41,7 +43,7 @@ rm -rf ${RPM_BUILD_ROOT}
 
 %files
 %defattr(644,root,root,755)
-%doc Changelog README TODO
+%doc Changelog README TODO tcc-doc.html
 %attr(755,root,root) %{_bindir}/*
 %{_libdir}/lib*.a
 %{_libdir}/tcc

@@ -1,0 +1,59 @@
+--- tcc-0.9.21/bcheck.c~	2004-10-25 23:18:51.000000000 +0200
++++ tcc-0.9.21/bcheck.c	2004-10-27 23:51:06.498797571 +0200
+@@ -74,20 +74,6 @@
+ void __bound_new_region(void *p, unsigned long size);
+ int __bound_delete_region(void *p);
+ 
+-/* currently, tcc cannot compile that because we use unsupported GNU C
+-   extensions */
+-#if !defined(__TINYC__)
+-void *__bound_ptr_add(void *p, int offset) __attribute__((regparm(2)));
+-void *__bound_ptr_indir1(void *p, int offset) __attribute__((regparm(2)));
+-void *__bound_ptr_indir2(void *p, int offset) __attribute__((regparm(2)));
+-void *__bound_ptr_indir4(void *p, int offset) __attribute__((regparm(2)));
+-void *__bound_ptr_indir8(void *p, int offset) __attribute__((regparm(2)));
+-void *__bound_ptr_indir12(void *p, int offset) __attribute__((regparm(2)));
+-void *__bound_ptr_indir16(void *p, int offset) __attribute__((regparm(2)));
+-void __bound_local_new(void *p) __attribute__((regparm(1)));
+-void __bound_local_delete(void *p) __attribute__((regparm(1)));
+-#endif
+-
+ void *__bound_malloc(size_t size, const void *caller);
+ void *__bound_memalign(size_t size, size_t align, const void *caller);
+ void __bound_free(void *ptr, const void *caller);
+@@ -168,6 +154,7 @@
+ 
+ /* return '(p + offset)' for pointer arithmetic (a pointer can reach
+    the end of a region in this case */
++__attribute__((regparm(2)))
+ void *__bound_ptr_add(void *p, int offset)
+ {
+     unsigned long addr = (unsigned long)p;
+@@ -194,6 +181,7 @@
+ /* return '(p + offset)' for pointer indirection (the resulting must
+    be strictly inside the region */
+ #define BOUND_PTR_INDIR(dsize)                                          \
++__attribute__((regparm(2)))                                             \
+ void *__bound_ptr_indir ## dsize (void *p, int offset)                  \
+ {                                                                       \
+     unsigned long addr = (unsigned long)p;                              \
+@@ -227,7 +215,8 @@
+ #endif
+ 
+ /* called when entering a function to add all the local regions */
+-void __bound_local_new(void *p1) 
++__attribute__((regparm(1)))
++void __bound_local_new(void *p1)
+ {
+     unsigned long addr, size, fp, *p = p1;
+     GET_CALLER_FP(fp);
+@@ -243,7 +232,8 @@
+ }
+ 
+ /* called when leaving a function to delete all the local regions */
+-void __bound_local_delete(void *p1) 
++__attribute__((regparm(1)))
++void __bound_local_delete(void *p1)
+ {
+     unsigned long addr, fp, *p = p1;
+     GET_CALLER_FP(fp);
