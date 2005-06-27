@@ -44,3 +44,18 @@
  endif
  
  clean:
+@@ -231,10 +231,10 @@
+ 
+ # libtcc generation and example
+ libinstall: libtcc.a 
+-	mkdir -p "$(libdir)"
+-	$(INSTALL) -m644 libtcc.a "$(libdir)"
+-	mkdir -p "$(includedir)"
+-	$(INSTALL) -m644 libtcc.h "$(includedir)"
++	mkdir -p "$(DESTDIR)$(libdir)"
++	$(INSTALL) -m644 libtcc.a "$(DESTDIR)$(libdir)"
++	mkdir -p "$(DESTDIR)$(includedir)"
++	$(INSTALL) -m644 libtcc.h "$(DESTDIR)$(includedir)"
+ 
+ libtcc.o: tcc.c i386-gen.c Makefile
+ 	$(CC) $(CFLAGS) -DLIBTCC -c -o $@ $<
