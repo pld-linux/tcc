@@ -1,12 +1,12 @@
 Summary:	Tiny C Compiler
 Summary(pl):	Ma³y kompilator C
 Name:		tcc
-Version:	0.9.22
+Version:	0.9.23
 Release:	1
 License:	LGPL
 Group:		Development/Languages
 Source0:	http://fabrice.bellard.free.fr/tcc/%{name}-%{version}.tar.gz
-# Source0-md5:	62869f2cbf1d8a9b4ea1603311426228
+# Source0-md5:	ba925bf241b0980a581bbc6ad3d5b9a1
 Patch0:		%{name}-DESTDIR.patch
 ExclusiveArch:	%{ix86}
 URL:		http://fabrice.bellard.free.fr/tcc/
