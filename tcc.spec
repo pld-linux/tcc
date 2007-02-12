@@ -1,5 +1,5 @@
 Summary:	Tiny C Compiler
-Summary(pl.UTF-8):   Mały kompilator C
+Summary(pl.UTF-8):	Mały kompilator C
 Name:		tcc
 Version:	0.9.23
 Release:	1
