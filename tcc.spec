@@ -1,5 +1,5 @@
 Summary:	Tiny C Compiler
-Summary(pl):	Ma³y kompilator C
+Summary(pl.UTF-8):   MaÅ‚y kompilator C
 Name:		tcc
 Version:	0.9.23
 Release:	1
@@ -16,8 +16,8 @@ Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Tiny C Compiler - C Scripting Everywhere - The Smallest ANSI C
 compiler.
 
-%description -l pl
-Ma³y kompilator C - Wszêdzie skrypty w C - Najmniejszy kompilator ANSI
+%description -l pl.UTF-8
+MaÅ‚y kompilator C - WszÄ™dzie skrypty w C - Najmniejszy kompilator ANSI
 C.
 
 %prep
