@@ -1,9 +1,9 @@
---- tcc/Makefile~	2005-06-27 02:10:35.714486128 +0000
-+++ tcc/Makefile	2005-06-27 02:12:32.427743016 +0000
-@@ -192,28 +192,28 @@
+--- tcc-0.9.24.orig/Makefile	2008-05-03 11:39:44.883860625 +0000
++++ tcc-0.9.24/Makefile	2008-05-03 11:41:24.275278769 +0000
+@@ -203,28 +203,28 @@
  install: tcc_install libinstall
  
- tcc_install: $(PROGS) tcc.1 libtcc1.a $(BCHECK_O) tcc-doc.html tcc.1
+ tcc_install: $(PROGS) tcc.1 libtcc1.a $(BCHECK_O) tcc-doc.html
 -	mkdir -p "$(bindir)"
 -	$(INSTALL) -s -m755 $(PROGS) "$(bindir)"
 +	mkdir -p "$(DESTDIR)$(bindir)"
@@ -19,11 +19,10 @@
 +	mkdir -p "$(DESTDIR)$(tccdir)"
 +	mkdir -p "$(DESTDIR)$(tccdir)/include"
  ifdef CONFIG_WIN32
--	mkdir -p "$(tccdir)/lib"
+ 	mkdir -p "$(tccdir)/lib"
 -	$(INSTALL) -m644 libtcc1.a win32/lib/*.def "$(tccdir)/lib"
 -	cp -r win32/include/. "$(tccdir)/include"
 -	cp -r win32/examples/. "$(tccdir)/examples"
-+	mkdir -p "$(DESTDIR)$(tccdir)/lib"
 +	$(INSTALL) -m644 libtcc1.a win32/lib/*.def "$(DESTDIR)$(tccdir)/lib"
 +	cp -r win32/include/. "$(DESTDIR)$(tccdir)/include"
 +	cp -r win32/examples/. "$(DESTDIR)$(tccdir)/examples"
@@ -44,7 +43,7 @@
  endif
  
  clean:
-@@ -231,10 +231,10 @@
+@@ -242,10 +242,10 @@
  
  # libtcc generation and example
  libinstall: libtcc.a 
@@ -58,4 +57,4 @@
 +	$(INSTALL) -m644 libtcc.h "$(DESTDIR)$(includedir)"
  
  libtcc.o: tcc.c i386-gen.c Makefile
- 	$(CC) $(CFLAGS) -DLIBTCC -c -o $@ $<
+ ifdef CONFIG_WIN32
