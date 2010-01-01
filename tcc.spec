@@ -10,7 +10,7 @@ Source0:	http://download.savannah.nongnu.org/releases/tinycc/%{name}-%{version}.
 Patch0:		%{name}-DESTDIR.patch
 ExclusiveArch:	%{ix86}
 URL:		http://fabrice.bellard.free.fr/tcc/
-Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 Tiny C Compiler - C Scripting Everywhere - The Smallest ANSI C
