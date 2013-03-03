@@ -35,7 +35,6 @@ kompilator ANSI C.
 	--extra-ldflags="%{rpmldflags}" \
 
 %{__make}
-#	CFLAGS="%{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT

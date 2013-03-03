@@ -1,0 +1,14 @@
+--- tcc-0.9.26/tcc-doc.texi.orig	2013-02-15 15:24:00.000000000 +0100
++++ tcc-0.9.26/tcc-doc.texi	2013-03-03 12:10:07.829611822 +0100
+@@ -2,9 +2,9 @@
+ @c %**start of header
+ @setfilename tcc-doc.info
+ @settitle Tiny C Compiler Reference Documentation
+-@dircategory Software development
++@dircategory Programming Languages:
+ @direntry
+-* TCC: (tcc-doc).               The Tiny C Compiler.
++* TCC: (tcc-doc).			The Tiny C Compiler
+ @end direntry
+ @c %**end of header
+ 
